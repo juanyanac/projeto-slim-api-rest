@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<script type="text/javascript">
+
+		//funcion con ajax
+
+		  /* $(document).ready(function () {
+           $(function () {
+               var cad = "Los libros en el archivo JSON son:<br />";
+               $.ajax({
+                  url: "http://clientslim.apache.localhost/example.json",
+                  type: "get",
+                  success: function(data){
+                  	for (l in data.libros.lib) {
+                       cad += ("<br />" + data.libros.lib[l].libro + " de " +
+                           data.libros.lib[l].autores[0] + ", " +
+                           data.libros.lib[l].autores[1] + " y " +
+                           data.libros.lib[l].autores[2] + "<br />Editorial: " +
+                           data.libros.lib[l].editorial +
+                           "<br />").replace("y undefined", "").replace(", undefined", "");
+                    }
+                   $("#texto").html(cad);
+                  }
+               }) //fin ajax
+           }) //fin funcion 
+       }); //fin document ready	*/
+
+
+		//funcion con getjson
+
+		   /*$(document).ready(function () {
+           $(function () {
+               var cad = "Los libros en el archivo JSON son:<br />";
+               var cadena = $.getJSON("http://clientslim.apache.localhost/example.json", function (data) {
+                   for (l in data.libros.lib) {
+                       cad += ("<br />" + data.libros.lib[l].libro + " de " +
+                           data.libros.lib[l].autores[0] + ", " +
+                           data.libros.lib[l].autores[1] + " y " +
+                           data.libros.lib[l].autores[2] + "<br />Editorial: " +
+                           data.libros.lib[l].editorial +
+                           "<br />").replace("y undefined", "").replace(", undefined", "");
+                    }
+                   $("#texto").html(cad);
+               }) //fin getjson     
+           }) //fin funcion 
+       }); //fin document ready	*/
+
+
+		//funcion con ajax
+
+		  /* $(document).ready(function () {
+           $(function () {
+               var cad = "Los libros en el archivo JSON son:<br />";
+               $.ajax({
+                  url: "http://slim.apache.localhost/api.php/productos",
+                  type: "get",
+                  success: function(data){
+                   for (l in data.products.prod) {
+                       cad += ("<br />" + data.products.prod[l].id +
+                           data.products.prod[l].name);
+                    }
+                   $("#texto").html(cad);
+                  }
+               }) //fin ajax
+           }) //fin funcion 
+       }); //fin document ready	*/
+
+//funcion con getjson
+
+            function getProducts () {
+               //var cad = "Los libros en el archivo JSON son:<br />";
+               $.getJSON("http://slim.apache.localhost/api.php/productos", function (data) {
+                   for (l in data.products.prod) {
+                    $(".table").append("<tr>" +
+                                            "<td>" + data.products.prod[l].id + "</td>" +
+                                            "<td>" + data.products.prod[l].name + "</td>" +
+                                            "<td>" + data.products.prod[l].description + "</td>" +
+                                            "<td>" + data.products.prod[l].price + "</td>" +
+                                            "<td> <span id='del' class='delete btn btn-danger' data-producto='"+ data.products.prod[l].id +"'>Borrar</span></td>" +
+                                            "<td> <span class='update btn btn-warning' data-producto='"+ data.products.prod[l].id +"'>Editar</span></td>" +
+                                      "</tr>");
+                    }//fin for
+
+                   //$("#texto").html(cad);
+               }); //fin getjson     
+           }
+
+
+
+       $(document).ready(function () {
+
+          //cargar datos
+           getProducts();
+
+           $("#enviar_form").click(function (e) {
+               e.preventDefault();
+
+                  $.ajax({
+                  url: "http://slim.apache.localhost/api.php/productos",
+                  type: "post",
+                  data: {name: $("#name_form").val(), description: $("#description_form").val(), price: $("#price_form").val()},
+                  success: function(data){
+                    $(".table").append("<tr><td>ID</td><td>Nombre</td><td>Descripcion</td><td>Precio</td><td>Editar</td><td>Eliminar</td></tr>");
+                    getProducts();
+                    $("#form")[0].reset();                   
+                  }
+               }) //fin ajax 
+
+                   
+               //}); //fin post
+                  //getProducts();
+                  //$("#form")[0].reset();
+                    
+                   //$("#form")[0].reset();
+                 
+           }); //fin enviar_from             
+
+           $("#del").click(function (e) {
+               //e.preventDefault();
+
+                  /*$.ajax({
+                  url: "http://slim.apache.localhost/api.php/productos",
+                  type: "delete",
+                  data: {id: $("#del").val()},
+                  success: function(data){
+                    $(".table").append("<tr><td>ID</td><td>Nombre</td><td>Descripcion</td><td>Precio</td><td>Editar</td><td>Eliminarrrrrr</td></tr>");
+                    getProducts();
+                    $("#form")[0].reset();                   
+                  }
+               }) //fin ajax  */
+               alert("Has hecho clic");   
+               }); //fin delete  
+
+
+       }); //fin document ready 
+
+		</script>	
+
+	</head>
+	<body>	
+		<h3>Cliente WEB API REST Slim</h3>
+		<div class="col-lg-7">
+		<table class="table" id="table">
+			<tr>
+				<td>ID</td>
+				<td>Nombre</td>
+				<td>Descripcion</td>
+				<td>Precio</td>
+				<td>Editar</td>
+				<td>Eliminar</td>
+			</tr>
+		</table>
+		</div>
+		<div class="col-lg-5">
+			<form id="form"  method="post" data-producto="0">
+			Nombre <input type="text" id="name_form" name="name" class="form-control">
+			Descripcion <textarea type="text" id="description_form" name="description" class="form-control"></textarea>
+			Precio <input type="text" id="price_form" name="price" class="form-control">
+			<input id="enviar_form" type="submit" name="" value="Enviar">
+			</form>
+		</div>
+
+	</body>
+</html>

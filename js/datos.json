@@ -1,0 +1,43 @@
+{
+    "libros": {
+        "lib": [
+            {
+                "libro": "Beginning XML, Cuarta Edición",
+                "año": "2007",
+                "autores": [
+                    "David Hunter",
+                    "Jeff Rafter",
+                    "Andrew Watt"
+                ],
+                "editorial": "Wrox"
+            },
+            {
+                "libro": "Code First",
+                "año": "2012",
+                "autores": [
+                    "Julia Lerman"
+                ],
+                "editorial": "O'Reilly"
+            },
+			{
+                "libro": " .NET: Architecting Applications for the Enterprise",
+                "año": "2009",
+                "autores": [
+                    "Dino Espósito",
+        	    "Andrea Saltarello"
+                ],
+                "editorial": "Microsoft Press"
+            },
+			{
+                "libro": "Professional ASP.NET MVC 4",
+                "año": "2012",
+                "autores": [
+                    "Jon Galloway",
+					"Phil Haack",
+					"Brad Wilson"
+                ],
+                "editorial": "Wrox (P2P)"
+            }
+        ]
+    }
+}
